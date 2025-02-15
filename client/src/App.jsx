@@ -1,41 +1,59 @@
+import "./App.css";
+
 import { useState, useEffect } from "react";
-import axios from "axios";
 
 function App() {
-  const [notes, setNotes] = useState([]);
-  const [text, setText] = useState("");
+  const API_URL = import.meta.env.VITE_API_URL;
+
+  const [data, setData] = useState([
+    {
+      id: 1,
+      title: "Inception",
+      genre: "Sci-Fi",
+      release_year: 2010,
+      description:
+        "A thief who enters dreams to steal secrets gets a chance at redemption.",
+      poster_url:
+        "https://image.tmdb.org/t/p/w500/qmDpIHrmpJINaRKAfWQfftjCdyi.jpg",
+    },
+  ]);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:3000/api/notes")
-      .then((res) => setNotes(res.data));
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`${API_URL}/`);
+        const result = await response.json();
+        console.log("API Response:", result); // Debugging API response
+
+        setData(result);
+      } catch (e) {
+        console.error("Error connecting with backend:", e);
+      }
+    };
+    fetchData();
   }, []);
 
-  const addNote = async () => {
-    if (!text) return;
-    const res = await axios.post("http://localhost:3000/api/notes", { text });
-    setNotes([res.data, ...notes]);
-    setText("");
-  };
-
-  const deleteNote = async (id) => {
-    await axios.delete(`http://localhost:3000/api/notes/${id}`);
-    setNotes(notes.filter((note) => note.id !== id));
-  };
-
   return (
-    <div>
-      <h1>QuickNotes</h1>
-      <input value={text} onChange={(e) => setText(e.target.value)} />
-      <button onClick={addNote}>Add Note</button>
+    <>
+      <h1 className="text-3xl font-bold underline">Hello world!</h1>{" "}
+      <button className="btn btn-secondary">Secondary</button>
       <ul>
-        {notes.map((note) => (
-          <li key={note.id}>
-            {note.text} <button onClick={() => deleteNote(note.id)}>X</button>
-          </li>
-        ))}
+        {data &&
+          data.map((item) => (
+            <li key={item.id}>
+              {" "}
+              <img src={item.poster_url} alt={item.titele} className="poster" />
+              <h2>
+                {item.title} ({item.release_year})
+              </h2>
+              <p>
+                <strong>Genre:</strong> {item.genre}
+              </p>
+              <p>{item.description}</p>
+            </li>
+          ))}
       </ul>
-    </div>
+    </>
   );
 }
 
