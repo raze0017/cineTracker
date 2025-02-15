@@ -1,5 +1,2 @@
-# quickNotes
-
-a note app created using react for frontend and postgresql+express for backend
-
--learning project
+#CineTracker
+Movie tracker built with React, Express, and PostgreSQL. Users can contribute to a shared watchlist, track popular movies, and manage their favorites. The app allows adding, editing, and searching for movies.
