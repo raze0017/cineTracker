@@ -1,5 +1,4 @@
 import "./App.css";
-
 import { useState, useEffect } from "react";
 
 function App() {
@@ -23,8 +22,7 @@ function App() {
       try {
         const response = await fetch(`${API_URL}/`);
         const result = await response.json();
-        console.log("API Response:", result); // Debugging API response
-
+        console.log("API Response:", result);
         setData(result);
       } catch (e) {
         console.error("Error connecting with backend:", e);
@@ -34,26 +32,35 @@ function App() {
   }, []);
 
   return (
-    <>
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>{" "}
-      <button className="btn btn-secondary">Secondary</button>
-      <ul>
+    <div className="p-6">
+      <h1 className="text-3xl font-bold underline mb-6">Movie List</h1>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {data &&
           data.map((item) => (
-            <li key={item.id}>
-              {" "}
-              <img src={item.poster_url} alt={item.titele} className="poster" />
-              <h2>
-                {item.title} ({item.release_year})
-              </h2>
-              <p>
-                <strong>Genre:</strong> {item.genre}
-              </p>
-              <p>{item.description}</p>
-            </li>
+            <div key={item.id} className="card bg-base-100 shadow-xl">
+              <figure>
+                <img
+                  src={item.poster_url}
+                  alt={item.title}
+                  className="w-full h-80 object-contain"
+                />
+              </figure>
+              <div className="card-body">
+                <h2 className="card-title">
+                  {item.title} ({item.release_year})
+                </h2>
+                <p>
+                  <strong>Genre:</strong> {item.genre}
+                </p>
+                <p>{item.description}</p>
+                <div className="card-actions justify-end">
+                  <button className="btn btn-primary">More Info</button>
+                </div>
+              </div>
+            </div>
           ))}
-      </ul>
-    </>
+      </div>
+    </div>
   );
 }
 
