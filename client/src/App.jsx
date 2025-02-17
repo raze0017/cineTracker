@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Movies from "./components/movies";
 import Genres from "./components/Genres";
+import Add from "./components/Add";
 function App() {
   const API_URL = import.meta.env.VITE_API_URL;
 
@@ -39,14 +40,15 @@ function App() {
           >
             Genres
           </Link>
-          <a className="btn btn-secondary sm:text-xs lg:text-xl">
+          <Link to="/Add" className="btn btn-secondary sm:text-xs lg:text-xl">
             Add New Movie
-          </a>
+          </Link>
         </div>{" "}
       </div>
       <Routes>
         <Route path="/" element={<Movies data={data} />} />
         <Route path="/Genres" element={<Genres data={data} />} />
+        <Route path="/Add" element={<Add />} />
       </Routes>
     </Router>
   );

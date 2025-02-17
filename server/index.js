@@ -1,15 +1,16 @@
 require("dotenv").config();
 
 const express = require("express");
-const bodyParser = require("body-parser");
-
-const app = express();
 const cors = require("cors");
-const useRoutes = require("./routes/router");
-app.use(bodyParser.urlencoded({ extended: true }));
+const app = express();
 
 app.use(cors());
+
 app.use(express.json());
+app.use(express.urlencoded({ extended: true })); // ✅ Parse URL-encoded data
+
+const useRoutes = require("./routes/router");
+console.log("Routes initialized!"); // Add this line
 
 app.use("/", useRoutes);
 
