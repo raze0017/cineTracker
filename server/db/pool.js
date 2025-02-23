@@ -10,7 +10,6 @@ const { Pool } = require("pg");
 
 module.exports = new Pool({
   connectionString:
-    process.env.DATABASE_URL ||
-    "postgresql://cinema_yqio_user:An4vsFX7qVLrJX0UP0InfEpWEoQTm0sC@dpg-cutko7ij1k6c738dd5fg-a.oregon-postgres.render.com/cinema_yqio",
+    process.env.DATABASE_URL || "postgresql://raze:raze@localhost:5432/cinema",
   ssl: { rejectUnauthorized: false }, // Required for Render
 });
