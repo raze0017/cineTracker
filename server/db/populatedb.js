@@ -30,6 +30,7 @@ async function main() {
     connectionString:
       process.env.DATABASE_URL ||
       "postgresql://raze:raze@localhost:5432/cinema",
+    ssl: { rejectUnauthorized: false }, // Required for Render
   });
   await client.connect();
   await client.query(SQL);
