@@ -35,6 +35,13 @@ const Add = () => {
     } catch (error) {
       console.log("Error in submitting:", error);
     }
+    setFormData({
+      title: "",
+      genre: "",
+      release_year: "",
+      description: "",
+      poster_url: "",
+    });
   };
 
   return (
