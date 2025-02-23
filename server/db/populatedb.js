@@ -27,7 +27,9 @@ INSERT INTO movies (title, genre, release_year, description, poster_url) VALUES
 async function main() {
   console.log("seeding...");
   const client = new Client({
-    connectionString: "postgresql://raze:raze@localhost:5432/cinema",
+    connectionString:
+      process.env.DATABASE_URL ||
+      "postgresql://raze:raze@localhost:5432/cinema",
   });
   await client.connect();
   await client.query(SQL);
