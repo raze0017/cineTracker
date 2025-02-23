@@ -1,29 +1,12 @@
 import "./App.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Movies from "./components/movies";
 import Genres from "./components/Genres";
 import Add from "./components/Add";
 function App() {
-  const API_URL = import.meta.env.VITE_API_URL;
-
-  const [data, setData] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(`${API_URL}/`);
-        const result = await response.json();
-        console.log("API Response:", result);
-        setData(result);
-      } catch (e) {
-        console.error("Error connecting with backend:", e);
-      }
-    };
-    fetchData();
-  }, []);
-
+  const [movies, setMovies] = useState([]);
   return (
     <Router>
       <div className="p-6">
@@ -46,8 +29,11 @@ function App() {
         </div>{" "}
       </div>
       <Routes>
-        <Route path="/" element={<Movies data={data} />} />
-        <Route path="/Genres" element={<Genres data={data} />} />
+        <Route
+          path="/"
+          element={<Movies movies={movies} setMovies={setMovies} />}
+        />
+        <Route path="/Genres" element={<Genres data={movies} />} />
         <Route path="/Add" element={<Add />} />
       </Routes>
     </Router>

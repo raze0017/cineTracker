@@ -15,5 +15,17 @@ async function addMovies(req, res) {
     res.status(500).json({ message: "Failed to add movie" });
   }
 }
+async function deleteMovie(req, res) {
+  try {
+    const { id } = req.params;
+    console.log(id);
+    await db.deleteMovie(id);
+    res
+      .status(200)
+      .json({ message: "Movie deleted successfully", movie: req.body });
+  } catch (error) {
+    console.log("error in deleting idiot", error);
+  }
+}
 
-module.exports = { displayMovies, addMovies };
+module.exports = { displayMovies, addMovies, deleteMovie };
