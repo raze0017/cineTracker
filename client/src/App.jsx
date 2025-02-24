@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Movies from "./components/movies";
 import Genres from "./components/Genres";
+import GenreMovies from "./components/GenreMovies";
 import Add from "./components/Add";
 function App() {
   const [movies, setMovies] = useState([]);
@@ -34,6 +35,7 @@ function App() {
           element={<Movies movies={movies} setMovies={setMovies} />}
         />
         <Route path="/Genres" element={<Genres data={movies} />} />
+        <Route path="/Genres/:GenreName" element={<GenreMovies />} />
         <Route path="/Add" element={<Add />} />
       </Routes>
     </Router>

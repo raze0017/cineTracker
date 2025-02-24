@@ -20,5 +20,11 @@ async function deleteMovie(id) {
   console.log(id);
   await pool.query(`delete from movies where id=$1`, [id]);
 }
+async function genreWise(genre) {
+  const { rows } = await pool.query(`SELECT * from movies where genre=$1`, [
+    genre,
+  ]);
+  return rows;
+}
 
 module.exports = { getMovies, addMovies, deleteMovie };

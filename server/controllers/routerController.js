@@ -27,5 +27,10 @@ async function deleteMovie(req, res) {
     console.log("error in deleting idiot", error);
   }
 }
+async function genreWise(req, res) {
+  const { genre } = req.params;
+  const movieInfo = await db.genreWise(genre);
+  res.send(movieInfo);
+}
 
-module.exports = { displayMovies, addMovies, deleteMovie };
+module.exports = { displayMovies, addMovies, deleteMovie, genreWise };
