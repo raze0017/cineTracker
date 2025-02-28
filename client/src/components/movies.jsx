@@ -53,7 +53,6 @@ export default function Movies({ movies, setMovies }) {
             </p>
             <p>{item.description}</p>
             <div className="card-actions justify-end">
-              <button className="btn btn-primary">More Info</button>
               <button
                 onClick={() => deleteMovies(item.id)}
                 className="btn btn-accent"
